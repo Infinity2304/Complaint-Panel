@@ -7,31 +7,12 @@ function Home() {
 
 
   const { loading, register } = useRegister()
-
-
-  const allFetch = async () => {
-    try {
-      const response = await fetch('/api/complaint/');
-      if (!response.ok) {
-        throw new Error('server error');
-      }
-      const data = await response.json();
-      console.log(data);
-      setComplaint(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Submit the complaint
       await register(input);
       console.log(input);
-
-      // Fetch the updated list of complaints
-      allFetch();
 
       // Clear the input fields
       setInput({
@@ -50,11 +31,7 @@ function Home() {
     navigate('/complaint');
   }
 
-  useEffect(() => {
-    allFetch();
-  }, [])
 
-  const [complaint, setComplaint] = useState([])
   const [input, setInput] = useState({
     name: "",
     description: "",
