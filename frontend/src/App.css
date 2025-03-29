@@ -71,3 +71,62 @@
   gap: 10px;
 }
 
+.home-buttons{
+  display: flex;
+  gap: 30px;
+}
+
+
+/* for complaint table */
+.table-container {
+  width: 100%;
+  margin: 20px auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Styling for the table */
+.complaint-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Table header styling */
+.complaint-table th {
+  background-color: #4CAF50;
+  color: black;
+  padding: 12px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Table row styling */
+.complaint-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+/* Alternate row colors for better readability */
+.complaint-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect for rows */
+.complaint-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Title styling */
+.table-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: beige;
+  font-weight: bold;
+}
