@@ -8,13 +8,17 @@ function Main() {
     const handleStudent = ()=>{
         navigate('/home');
     }
+
+    const handleProfessor =()=>{
+        navigate('/admin');
+    }
     return (
         <>
             <div>
                 <h1>Main page</h1>
                 <h3>Are you a student or professor ?</h3>
                 <button onClick={handleStudent}>Student</button>
-                <button>Professor</button>
+                <button onClick={handleProfessor}>Professor</button>
             </div>
         </>
     )

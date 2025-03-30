@@ -25,7 +25,7 @@ def createComplaint(request):
     else:
         return Response(serializedData.errors, status=status.HTTP_400_BAD_REQUEST)
     
-@api_view(['POST'])
+@api_view(['DELETE'])
 def deleteComplaint(request, pk):
     try:
         complaint = get_object_or_404(Complaint, pk=pk)
