@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Complaint, Admin
 from .serializer import ComplaintSerializer, AdminSerializer
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -23,6 +24,28 @@ def createComplaint(request):
         return Response({'message': 'Complaint registered'}, status=status.HTTP_201_CREATED)
     else:
         return Response(serializedData.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def deleteComplaint(request, pk):
+    try:
+        complaint = get_object_or_404(Complaint, pk=pk)
+    except Complaint.DoesNotExist:
+        return Response({'error': 'Complaint not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    complaint.delete()
+    return Response({'message':'Complaint Deleted'}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def updateComplaintStatus(request, pk):
+    try:
+        complaint = get_object_or_404(Complaint, pk=pk)
+    except Complaint.DoesNotExist:
+        return Response({'error': 'Complaint not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    complaint.status = not complaint.status
+    complaint.save()
+    return Response({'message':'Complaint Status updated'}, status=status.HTTP_200_OK)
+    
 
 #Admin views
 @api_view(['POST'])
