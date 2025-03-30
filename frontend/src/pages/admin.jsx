@@ -37,6 +37,22 @@ const Admin = () => {
         allFetch();
     }
 
+    const handleUpdate= async (id) => {
+        console.log('update clicked');
+        console.log(id);
+        
+        try {
+            // Delete the complaint
+            await update(id);
+            console.log("complaint updated")
+
+        } catch (error) {
+            console.error("Error updating complaint:", error);
+        }
+        allFetch();
+    }
+
+
     useEffect(() => {
         allFetch();
     }, []);
@@ -66,7 +82,7 @@ const Admin = () => {
                                     <td>{complaint.description}</td>
                                     <td>{complaint.course}</td>
                                     <td>{complaint.roll}</td>
-                                    <td>{complaint.status ? "open" : "close"}</td>
+                                    <td onClick={()=> handleUpdate(complaint.id)}>{complaint.status ? "open" : "close"}</td>
                                     <td onClick={()=> handleDelete(complaint.id)}><MdDelete /></td>
                                 </tr>
                             ))}

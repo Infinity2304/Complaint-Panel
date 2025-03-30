@@ -31,7 +31,7 @@ const useOperations = () => {
 
     }
 
-    const update = async({id})=>{
+    const update = async(id)=>{
         setloading(true);
         try {
             const res = await fetch(`/api/complaint/update/${id}`, {
