@@ -78,7 +78,7 @@ def login(request):
         admin = Admin.objects.get(username=username)
         if admin.password == password :
             response = Response({'message','Admin logged in'}, status=status.HTTP_200_OK) 
-            response.set_cookie('admin_data', admin.id, httponly=True, secure=True, samesite='None', path='/')
+            response.set_cookie('admin_data', admin.id, secure=True, samesite='None', path='/')
             return response
         else:
             return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)

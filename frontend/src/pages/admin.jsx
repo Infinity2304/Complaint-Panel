@@ -2,6 +2,9 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { MdDelete } from "react-icons/md";
 import useOperations from '../hooks/useOperations';
+import { IoLogOutOutline } from "react-icons/io5";
+import useAdmin from '../hooks/useAdmin';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
     const [complaint, setComplaint] = useState([]);
@@ -24,7 +27,7 @@ const Admin = () => {
     const handleDelete = async (id) => {
         console.log('delete clicked');
         console.log(id);
-        
+
         try {
             // Delete the complaint
             await remove(id);
@@ -37,10 +40,10 @@ const Admin = () => {
         allFetch();
     }
 
-    const handleUpdate= async (id) => {
+    const handleUpdate = async (id) => {
         console.log('update clicked');
         console.log(id);
-        
+
         try {
             // Delete the complaint
             await update(id);
@@ -52,6 +55,13 @@ const Admin = () => {
         allFetch();
     }
 
+    const {logout} = useAdmin();
+
+    const navigate = useNavigate();
+    const handleLogout = async()=>{
+        await logout();
+        navigate('/')
+    }
 
     useEffect(() => {
         allFetch();
@@ -61,33 +71,38 @@ const Admin = () => {
         <>
             <h1 className="table-title">Complaints</h1>
             {complaint.length > 0 ? (
-                <div className="table-container">
-                    <table className="complaint-table">
-                        <thead>
-                            <tr>
-                                <th>Sr. No.</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Course</th>
-                                <th>Roll</th>
-                                <th>Status</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {complaint.map((complaint, index) => (
-                                <tr key={complaint.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{complaint.name}</td>
-                                    <td>{complaint.description}</td>
-                                    <td>{complaint.course}</td>
-                                    <td>{complaint.roll}</td>
-                                    <td onClick={()=> handleUpdate(complaint.id)}>{complaint.status ? "open" : "close"}</td>
-                                    <td onClick={()=> handleDelete(complaint.id)}><MdDelete /></td>
+                <div>
+                    <div className="table-container">
+                        <table className="complaint-table">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Course</th>
+                                    <th>Roll</th>
+                                    <th>Status</th>
+                                    <th>Delete</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {complaint.map((complaint, index) => (
+                                    <tr key={complaint.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{complaint.name}</td>
+                                        <td>{complaint.description}</td>
+                                        <td>{complaint.course}</td>
+                                        <td>{complaint.roll}</td>
+                                        <td onClick={() => handleUpdate(complaint.id)}>{complaint.status ? "open" : "close"}</td>
+                                        <td onClick={() => handleDelete(complaint.id)}><MdDelete /></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className='logout'>
+                        <button onClick={handleLogout}><IoLogOutOutline /></button>
+                    </div>
                 </div>
             ) : (
                 <p className="no-complaints-message">No complaints to show</p>

@@ -145,3 +145,15 @@
   color: white;
   margin-top: 20px;
 }
+
+.auth_input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logout{
+  display: flex;
+  justify-content: end;
+  font-size: 20px;
+}

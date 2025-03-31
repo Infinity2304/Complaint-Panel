@@ -10,7 +10,7 @@ function Main() {
     }
 
     const handleProfessor =()=>{
-        navigate('/admin');
+        navigate('/auth');
     }
     return (
         <>
